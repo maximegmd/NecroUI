@@ -1,6 +1,8 @@
 var map = {};
 var marker = {};
 var oldMarkers = {};
+var currPos = {lat: 0, lng: 0};
+var currEasedPos = {lat: 0, lng: 0};
 
 function OpenWebSocket()
 {
@@ -45,6 +47,14 @@ function OnMessage(evt)
             oldMarkers[fort.Id].setIcon(icon);
        }
    }
+   else if(obj.$type.indexOf("UpdatePosition") > -1)
+   {
+        currPos.lat = obj.Latitude;
+        currPos.lng = obj.Longitude;
+       
+        if(currEasedPos.lat == 0 && currEasedPos.lng == 0)
+            currEasedPos = currPos;
+   }
 }
 
 function OnError(evt)
@@ -66,8 +76,7 @@ function initMap() {
     OpenWebSocket();
 
     
-    var currPos = {lat: 0, lng: 0};
-    var currEasedPos = {lat: 52, lng: -2};
+
 
     /*setInterval(function(){
         $.getJSON('data.json', {}, function(data) {
@@ -110,7 +119,7 @@ function initMap() {
         $.get('log.txt', {}, function(data) {
             $('#log').html(data);
         });
-    }, 1000);
+    }, 1000);*/
     
     setInterval(function() {
         currEasedPos.lat = ((currEasedPos.lat * 29) + currPos.lat) / 30
@@ -119,6 +128,5 @@ function initMap() {
 
         map.setCenter(currEasedPos);
         marker.setPosition(currEasedPos);
-    }, 50);*/
-    map.setCenter(currEasedPos);
+    }, 50);
 }
