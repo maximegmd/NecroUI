@@ -16,7 +16,7 @@ function initMap() {
 
     var oldMarkers = {};
     var currPos = {lat: 0, lng: 0};
-    var currEasedPos = {lat: 0, lng: 0};
+    var currEasedPos = {lat: 52, lng: -2};
 
     /*setInterval(function(){
         $.getJSON('data.json', {}, function(data) {
@@ -60,7 +60,7 @@ function initMap() {
             $('#log').html(data);
         });
     }, 1000);
-    */
+    
     setInterval(function() {
         currEasedPos.lat = ((currEasedPos.lat * 29) + currPos.lat) / 30
 
@@ -68,5 +68,6 @@ function initMap() {
 
         map.setCenter(currEasedPos);
         marker.setPosition(currEasedPos);
-    }, 50);
+    }, 50);*/
+    map.setCenter(currEasedPos);
 }
