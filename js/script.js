@@ -33,7 +33,7 @@ function OnMessage(evt)
                 });
             }
             
-            if(fort.type == 1) 
+            if(fort.Type == 1) 
             {
                 if(new Date() > new Date(fort.CooldownCompleteTimestampMs))
                     icon = ("img/pokestop.png");
@@ -41,8 +41,8 @@ function OnMessage(evt)
                     icon = ("img/pokestop_cooldown.png");
             }
 
-            oldMarkers[fort.id].setPosition({lat: fort.Latitude, lng: fort.Longitude});
-            oldMarkers[fort.id].setIcon(icon);
+            oldMarkers[fort.Id].setPosition({lat: fort.Latitude, lng: fort.Longitude});
+            oldMarkers[fort.Id].setIcon(icon);
        }
    }
 }
