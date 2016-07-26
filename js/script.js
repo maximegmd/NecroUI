@@ -7,7 +7,7 @@ var marker;
 
 function OpenWebSocket()
 {
-    websocket = new WebSocket("ws://127.0.0.1:14251");
+    websocket = new WebSocket("wss://127.0.0.1:14251");
     websocket.onopen = function(evt) { OnOpen(evt) };
     websocket.onclose = function(evt) { OnClose(evt) };
     websocket.onmessage = function(evt) { OnMessage(evt) };
