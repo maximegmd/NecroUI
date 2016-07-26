@@ -22,7 +22,7 @@ function OnClose(evt)
 function OnMessage(evt)
 {
    var obj = JSON.parse(evt.data);
-   if("PokeStopList".indexOf(obj.$type) > -1)
+   if(obj.$type.indexOf("PokeStopList") > -1)
    {
        for(fort of obj.Forts.$values)
        {
