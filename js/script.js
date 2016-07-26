@@ -2,7 +2,9 @@ var map = {};
 var marker = {};
 var oldMarkers = {};
 var currPos = {lat: 0, lng: 0};
-var currEasedPos = {lat: 0, lng: 0};
+var targetPos = {lat: 0, lng: 0};
+var speed = {x: 0, y: 0};
+var steps = 0;
 
 function OpenWebSocket()
 {
@@ -49,11 +51,27 @@ function OnMessage(evt)
    }
    else if(obj.$type.indexOf("UpdatePosition") > -1)
    {
-        currPos.lat = obj.Latitude;
-        currPos.lng = obj.Longitude;
+        targetPos.lat = obj.Latitude;
+        targetPos.lng = obj.Longitude;
+        
+        if(currPos.lat == 0 && currPos.lng == 0)
+            currPos = targetPos;
+        else
+        {
+            var latDiff = targetPos.lat - currPos.lat;
+            var lngDiff = targetPos.lng - currPos.lng;
+            
+            var magnitude = Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
+            
+            speed.x = latDiff / 20;
+            speed.y = lngDiff / 20;
+            
+            steps = 0;
+        }
+   }
+   else if(obj.$type.indexOf("ProfileEvent") > -1)
+   {
        
-        if(currEasedPos.lat == 0 && currEasedPos.lng == 0)
-            currEasedPos = currPos;
    }
 }
 
@@ -122,11 +140,15 @@ function initMap() {
     }, 1000);*/
     
     setInterval(function() {
-        currEasedPos.lat = ((currEasedPos.lat * 29) + currPos.lat) / 30
-
-        currEasedPos.lng = ((currEasedPos.lng * 29) + currPos.lng) / 30
-
-        map.setCenter(currEasedPos);
-        marker.setPosition(currEasedPos);
+        if(steps < 20)
+        {
+            steps++;
+            
+            currPos.lat += speed.x;
+            currPos.lng += speed.y;
+        }
+        
+        map.setCenter(currPos);
+        marker.setPosition(currPos);
     }, 50);
 }
