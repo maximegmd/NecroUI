@@ -2,17 +2,49 @@ $(document).ready(function(){
     $.ajaxSetup({ cache: false });
 });
 
+var wsUri = "ws://127.0.0.1:14251";
+var map;
+var marker;
+
+function OpenWebSocket()
+{
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) { OnOpen(evt) };
+    websocket.onclose = function(evt) { OnClose(evt) };
+    websocket.onmessage = function(evt) { OnMessage(evt) };
+    websocket.onerror = function(evt) { OnError(evt) };
+}
+
+function OnOpen(evt)
+{
+}
+
+function OnClose(evt)
+{
+}
+
+function OnMessage(evt)
+{
+    alert(evt);
+}
+
+function OnError(evt)
+{
+}
+
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         options: {
             draggable: false
         }
     });
 
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         map: map
     });
+    
+    OpenWebSocket
 
     var oldMarkers = {};
     var currPos = {lat: 0, lng: 0};
