@@ -60,7 +60,7 @@ function initMap() {
             $('#log').html(data);
         });
     }, 1000);
-
+    */
     setInterval(function() {
         currEasedPos.lat = ((currEasedPos.lat * 29) + currPos.lat) / 30
 
@@ -68,5 +68,5 @@ function initMap() {
 
         map.setCenter(currEasedPos);
         marker.setPosition(currEasedPos);
-    }, 50);*/
+    }, 50);
 }
