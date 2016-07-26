@@ -2,13 +2,12 @@ $(document).ready(function(){
     $.ajaxSetup({ cache: false });
 });
 
-var wsUri = "ws://127.0.0.1:14251";
 var map;
 var marker;
 
 function OpenWebSocket()
 {
-    websocket = new WebSocket(wsUri);
+    websocket = new WebSocket("ws://127.0.0.1:14251");
     websocket.onopen = function(evt) { OnOpen(evt) };
     websocket.onclose = function(evt) { OnClose(evt) };
     websocket.onmessage = function(evt) { OnMessage(evt) };
