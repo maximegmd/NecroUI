@@ -14,6 +14,8 @@ function createWindow () {
     "web-preferences": {
       "web-security": false
     }})
+    
+  mainWindow.setMenu(null);
 
   // and load the index.html of the app.
   mainWindow.loadURL(`https://yamashi.github.io/NecroUI/`)

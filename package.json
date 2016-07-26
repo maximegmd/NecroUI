@@ -1,14 +1,14 @@
 {
-  "name": "electron-quick-start",
+  "name": "NecroUI",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A standalone UI for NecroBot",
   "main": "main.js",
   "scripts": {
     "start": "electron . --disable-http-cache --ignore-certificate-errors"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/yamashi/NecroUI.git"
   },
   "keywords": [
     "Electron",
@@ -19,9 +19,9 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/yamashi/NecroUI/issues"
   },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "homepage": "https://github.com/yamashi/NecroUI/blob/master/README.md",
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
   }
