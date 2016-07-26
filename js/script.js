@@ -44,7 +44,7 @@ function initMap() {
         map: map
     });
     
-    OpenWebSocket
+    OpenWebSocket();
 
     var oldMarkers = {};
     var currPos = {lat: 0, lng: 0};
