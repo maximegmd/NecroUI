@@ -18,7 +18,7 @@ function initMap() {
     var currPos = {lat: 0, lng: 0};
     var currEasedPos = {lat: 0, lng: 0};
 
-    setInterval(function(){
+    /*setInterval(function(){
         $.getJSON('data.json', {}, function(data) {
             if(currPos.lat == 0 && currPos.lng == 0)
                 currEasedPos = data.currPos;
@@ -68,5 +68,5 @@ function initMap() {
 
         map.setCenter(currEasedPos);
         marker.setPosition(currEasedPos);
-    }, 50);
+    }, 50);*/
 }
