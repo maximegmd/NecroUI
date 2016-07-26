@@ -24,7 +24,8 @@ function OnClose(evt)
 
 function OnMessage(evt)
 {
-    alert(evt);
+   var obj = JSON.parse(evt.data);
+   alert(obj.$type);
 }
 
 function OnError(evt)
