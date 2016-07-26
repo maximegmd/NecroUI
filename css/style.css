@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#map {
+    height: 100%;
+}
+#stats {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #FFFFFF;
+}
+#log {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    opacity: 0.75;
+}
