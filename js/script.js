@@ -1,9 +1,6 @@
-$(document).ready(function(){
-    $.ajaxSetup({ cache: false });
-});
-
-var map;
-var marker;
+var map = {};
+var marker = {};
+var oldMarkers = {};
 
 function OpenWebSocket()
 {
@@ -25,7 +22,29 @@ function OnClose(evt)
 function OnMessage(evt)
 {
    var obj = JSON.parse(evt.data);
-   alert(obj.$type);
+   if("PokeStopList".indexOf(obj.$type) > -1)
+   {
+       for(fort of obj.Forts.$values)
+       {
+            if(!(fort.Id in oldMarkers)) 
+            {
+                oldMarkers[fort.Id] = new google.maps.Marker({
+                    map: map
+                });
+            }
+            
+            if(fort.type == 1) 
+            {
+                if(new Date() > new Date(fort.CooldownCompleteTimestampMs))
+                    icon = ("img/pokestop.png");
+                else
+                    icon = ("img/pokestop_cooldown.png");
+            }
+
+            oldMarkers[fort.id].setPosition({lat: fort.Latitude, lng: fort.Longitude});
+            oldMarkers[fort.id].setIcon(icon);
+       }
+   }
 }
 
 function OnError(evt)
@@ -46,7 +65,7 @@ function initMap() {
     
     OpenWebSocket();
 
-    var oldMarkers = {};
+    
     var currPos = {lat: 0, lng: 0};
     var currEasedPos = {lat: 52, lng: -2};
 
