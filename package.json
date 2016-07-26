@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron . --disable-http-cache --ignore-certificate-errors"
   },
   "repository": {
     "type": "git",

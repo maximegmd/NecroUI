@@ -10,13 +10,13 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600, "node-integration": false})
+  mainWindow = new BrowserWindow({width: 800, height: 600, "node-integration": "iframe", // and this line
+    "web-preferences": {
+      "web-security": false
+    }})
 
   // and load the index.html of the app.
   mainWindow.loadURL(`https://yamashi.github.io/NecroUI/`)
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
