@@ -1,7 +1,6 @@
 var map = {};
 var marker = {};
 var oldMarkers = {};
-var currPos = {lat: 0, lng: 0};
 var targetPos = {lat: 0, lng: 0};
 var speed = {x: 0, y: 0};
 var steps = 0;
@@ -54,20 +53,9 @@ function OnMessage(evt)
         targetPos.lat = obj.Latitude;
         targetPos.lng = obj.Longitude;
         
-        if(currPos.lat == 0 && currPos.lng == 0)
-            currPos = targetPos;
-        else
-        {
-            var latDiff = targetPos.lat - currPos.lat;
-            var lngDiff = targetPos.lng - currPos.lng;
-            
-            var magnitude = Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
-            
-            speed.x = latDiff / 20;
-            speed.y = lngDiff / 20;
-            
-            steps = 0;
-        }
+        map.panTo(targetPos);
+
+        marker.setPosition(targetPos);
    }
    else if(obj.$type.indexOf("ProfileEvent") > -1)
    {
@@ -78,6 +66,7 @@ function OnMessage(evt)
 function OnError(evt)
 {
 }
+
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -139,16 +128,4 @@ function initMap() {
         });
     }, 1000);*/
     
-    setInterval(function() {
-        if(steps < 20)
-        {
-            steps++;
-            
-            currPos.lat += speed.x;
-            currPos.lng += speed.y;
-        }
-        
-        map.setCenter(currPos);
-        marker.setPosition(currPos);
-    }, 50);
 }
